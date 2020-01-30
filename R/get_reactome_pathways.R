@@ -12,10 +12,10 @@ get_reactome_pathways <- function(species = c("human", "mouse"),
                                   file_name = NULL,
                                   dir_reactome = getwd()) {
   species <- tolower(species[1])
-  if(is.null(file_name)) {
-    if(!(species %in% c("human", "mouse")))
-      stop("species must be either 'human' or 'mouse'.")
+  if(!(species %in% c("human", "mouse")))
+    stop("species must be either 'human' or 'mouse'.")
 
+  if(is.null(file_name)) {
     file_name <- file.path(dir_reactome,
                            paste0("reactome", "_", species, ".rds"))
   } else {
@@ -23,6 +23,9 @@ get_reactome_pathways <- function(species = c("human", "mouse"),
     if(!grepl(".rds", file_name)) file_name <- paste0(file_name, ".rds")
     file_name <- file.path(dir_reactome, file_name)
   }
+
+  # Convert species name; used later with reactome.db.
+  species <- ifelse(species == "human", "Homo_sapiens", "Mus_musculus")
 
   if(file.exists(file_name)) {
     cat("\t- loading reactome pathway data from", file_name, "\n")
@@ -32,7 +35,7 @@ get_reactome_pathways <- function(species = c("human", "mouse"),
     # Get list of reactome pathway names
     # Map names to ID
     # Map ID to entrez ID
-    # Save results as p by g matrix.
+    # Save results as p by g matrix. (Optional; not performed.)
 
     # library(reactome.db)
     # Map reactome NAME to reactome ID. Subset on pathways for this species.
