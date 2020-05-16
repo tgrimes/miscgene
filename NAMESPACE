@@ -3,8 +3,6 @@
 export(entrez_to_GO)
 export(entrez_to_attribute)
 export(entrez_to_symbol)
-export(get_reactome_pathways)
 export(init_mart_human)
 export(init_mart_mouse)
-export(remove_redundant_pathways)
 export(symbol_to_entrez)

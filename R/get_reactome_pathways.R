@@ -7,7 +7,6 @@
 #' the current working directory.
 #' @return A named list of vectors. Each vector corresponds to a Reactome pathway
 #' and contains the entrezgene IDs of the genes in that pathway.
-#' @export
 get_reactome_pathways <- function(species = c("human", "mouse"),
                                   file_name = NULL,
                                   dir_reactome = getwd()) {
@@ -104,7 +103,6 @@ get_reactome_pathways <- function(species = c("human", "mouse"),
 #' @param threshold A percentage between 0 and 1. If two pathways
 #' overlap by more than this amount, they are combined into one pathway.
 #' @return A modified list with overlapping pathways combined together.
-#' @export
 remove_redundant_pathways <- function(pathway_list, threshold = 0.9) {
   similar_to <- sapply(pathway_list,
                        function(p) find_similar_pathways(pathway_list, p, threshold))
