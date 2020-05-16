@@ -70,7 +70,13 @@ entrez_to_symbol <- function(df, species,
     }
   }
 
-  if(!is.numeric(df$entrezgene_id)) df$entrezgene_id <- as.numeric(df$entrezgene_id)
+  if(!is.numeric(df$entrezgene_id)) {
+    if(is.factor(df$entrezgene_id)) {
+      df$entrezgene_id <- as.numeric(as.character(df$entrezgene_id))
+    } else {
+      df$entrezgene_id <- as.numeric(df$entrezgene_id)
+    }
+  }
 
   return(dplyr::left_join(df, gene_info, by = "entrezgene_id"))
 }
