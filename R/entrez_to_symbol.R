@@ -78,5 +78,8 @@ entrez_to_symbol <- function(df, species,
     }
   }
 
-  return(dplyr::left_join(df, gene_info, by = "entrezgene_id"))
+  df <- dplyr::left_join(df, gene_info, by = "entrezgene_id")
+  df <- dplyr::filter(df, !is.na(entrezgene_id))
+  df <- dplyr::distinct(df)
+  return(df)
 }
